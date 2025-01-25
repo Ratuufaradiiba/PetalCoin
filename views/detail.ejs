@@ -1,0 +1,457 @@
+<%- include('partials/header') %>
+
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-xl-12 grid-margin stretch-card">
+      <div class="card-body title-detail">
+        <div class="row">
+          <div class="col-9">
+            <div class="d-flex align-items-center mb-3">
+              <img class="mr-2" src="<%= coin.image.thumb %>" alt="<%= coin.name %>" />
+              <h3 class="mr-2 mb-0"><%= coin.name %></h3>
+              <h3 class="mb-0 mr-2 text-uppercase text-muted font-weight-light"><%= coin.symbol %></h3>
+              <div class="icon icon-box-success rank text-muted font-weight-light">#<%= coin.market_cap_rank %></div>
+            </div>
+            <div class="d-flex align-items-center align-self-start mb-2">
+              <h1 class="mb-0 display-1 font-weight-bold">Rp <%= Intl.NumberFormat('en-DE').format(coin.market_data.current_price.idr) %></h1>
+              <% if (coin.market_data.price_change_percentage_24h_in_currency.idr > 0 && coin.market_data.price_change_percentage_24h_in_currency.idr) { %>
+              <h3 class="text-success ml-2 mb-0 font-weight-medium mr-2">+<%= coin.market_data.price_change_percentage_24h_in_currency.idr.toFixed(1) %>%</h3>
+              <div class="icon icon-box-success">
+                <span class="mdi mdi-arrow-top-right icon-item"></span>
+              </div>
+              <% } else { %>
+              <h3 class="text-danger ml-2 mb-0 font-weight-medium mr-2"><%= coin.market_data.price_change_percentage_24h_in_currency.idr.toFixed(1) %>%</h3>
+              <div class="icon icon-box-danger">
+                <span class="mdi mdi-arrow-bottom-left icon-item"></span>
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <div class="col-3 align-content-center"></div>
+        </div>
+        <div class="d-flex align-items-center">
+          <h5 class="text-muted font-weight-normal mb-0"><%= coin.market_data.current_price.btc.toFixed(5) %> BTC</h5>
+          <% if (coin.market_data.price_change_percentage_24h_in_currency.btc >= 0 ) { %>
+          <h6 class="text-success ml-2 mb-0 font-weight-medium mr-2">+<%= coin.market_data.price_change_percentage_24h_in_currency.btc.toFixed(1) %>%</h6>
+          <div class="icon icon-box-success btc">
+            <span class="mdi mdi-arrow-top-right icon-sm"></span>
+          </div>
+          <% } else { %>
+          <h6 class="text-danger ml-2 mb-0 font-weight-medium mr-2"><%= coin.market_data.price_change_percentage_24h_in_currency.btc.toFixed(1) %>%</h6>
+          <div class="icon icon-box-danger btc">
+            <span class="mdi mdi-arrow-bottom-left icon-sm"></span>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-2 col-md-4 col-sm-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9">
+              <div class="d-flex align-items-center align-self-start">
+                <% if (coin.market_data.price_change_percentage_1h_in_currency.idr >= 0 && coin.market_data.price_change_percentage_1h_in_currency.idr) { %>
+                <h3 class="text-success mb-0 font-weight-medium">+<%= coin.market_data.price_change_percentage_1h_in_currency.idr.toFixed(1)%>%</h3>
+                <% } else { %>
+                <h3 class="text-danger mb-0 font-weight-medium"><%= coin.market_data.price_change_percentage_1h_in_currency.idr.toFixed(1)%>%</h3>
+                <% } %>
+              </div>
+            </div>
+            <div class="col-3">
+              <% if (coin.market_data.price_change_percentage_1h_in_currency.idr >= 0 && coin.market_data.price_change_percentage_1h_in_currency.idr) { %>
+              <div class="icon icon-box-success">
+                <span class="mdi mdi-arrow-top-right icon-item percentage"></span>
+              </div>
+              <% } else { %>
+              <div class="icon icon-box-danger">
+                <span class="mdi mdi-arrow-bottom-left icon-item percentage"></span>
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <h6 class="text-muted font-weight-normal"><span class="font-weight-bold text-secondary">1h</span> Price in Currency</h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-2 col-md-4 col-sm-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9">
+              <div class="d-flex align-items-center align-self-start">
+                <% if (coin.market_data.price_change_percentage_24h_in_currency.idr >= 0 && coin.market_data.price_change_percentage_24h_in_currency.idr) { %>
+                <h3 class="text-success mb-0 font-weight-medium">+<%= coin.market_data.price_change_percentage_24h_in_currency.idr.toFixed(1)%>%</h3>
+                <% } else { %>
+                <h3 class="text-danger mb-0 font-weight-medium"><%= coin.market_data.price_change_percentage_24h_in_currency.idr.toFixed(1)%>%</h3>
+                <% } %>
+              </div>
+            </div>
+            <div class="col-3">
+              <% if (coin.market_data.price_change_percentage_24h_in_currency.idr >= 0 && coin.market_data.price_change_percentage_24h_in_currency.idr) { %>
+              <div class="icon icon-box-success">
+                <span class="mdi mdi-arrow-top-right icon-item percentage"></span>
+              </div>
+              <% } else { %>
+              <div class="icon icon-box-danger">
+                <span class="mdi mdi-arrow-bottom-left icon-item percentage"></span>
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <h6 class="text-muted font-weight-normal"><span class="font-weight-bold text-secondary">24h</span> Price in Currency</h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-2 col-md-4 col-sm-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9">
+              <div class="d-flex align-items-center align-self-start">
+                <% if (coin.market_data.price_change_percentage_7d_in_currency.idr >= 0 && coin.market_data.price_change_percentage_7d_in_currency.idr) { %>
+                <h3 class="text-success mb-0 font-weight-medium">+<%= coin.market_data.price_change_percentage_7d_in_currency.idr.toFixed(1)%>%</h3>
+                <% } else { %>
+                <h3 class="text-danger mb-0 font-weight-medium"><%= coin.market_data.price_change_percentage_7d_in_currency.idr.toFixed(1)%>%</h3>
+                <% } %>
+              </div>
+            </div>
+            <div class="col-3">
+              <% if (coin.market_data.price_change_percentage_7d_in_currency.idr >= 0 && coin.market_data.price_change_percentage_7d_in_currency.idr) { %>
+              <div class="icon icon-box-success">
+                <span class="mdi mdi-arrow-top-right icon-item percentage"></span>
+              </div>
+              <% } else { %>
+              <div class="icon icon-box-danger">
+                <span class="mdi mdi-arrow-bottom-left icon-item percentage"></span>
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <h6 class="text-muted font-weight-normal"><span class="font-weight-bold text-secondary">7d</span> Price in Currency</h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-2 col-md-4 col-sm-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9">
+              <div class="d-flex align-items-center align-self-start">
+                <% if (coin.market_data.price_change_percentage_14d_in_currency.idr >= 0 && coin.market_data.price_change_percentage_14d_in_currency.idr) { %>
+                <h3 class="text-success mb-0 font-weight-medium">+<%= coin.market_data.price_change_percentage_14d_in_currency.idr.toFixed(1)%>%</h3>
+                <% } else { %>
+                <h3 class="text-danger mb-0 font-weight-medium"><%= coin.market_data.price_change_percentage_14d_in_currency.idr.toFixed(1)%>%</h3>
+                <% } %>
+              </div>
+            </div>
+            <div class="col-3">
+              <% if (coin.market_data.price_change_percentage_14d_in_currency.idr >= 0 && coin.market_data.price_change_percentage_14d_in_currency.idr) { %>
+              <div class="icon icon-box-success">
+                <span class="mdi mdi-arrow-top-right icon-item percentage"></span>
+              </div>
+              <% } else { %>
+              <div class="icon icon-box-danger">
+                <span class="mdi mdi-arrow-bottom-left icon-item percentage"></span>
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <h6 class="text-muted font-weight-normal"><span class="font-weight-bold text-secondary">14d</span> Price in Currency</h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-2 col-md-4 col-sm-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9">
+              <div class="d-flex align-items-center align-self-start">
+                <% if (coin.market_data.price_change_percentage_30d_in_currency.idr >= 0 && coin.market_data.price_change_percentage_30d_in_currency.idr) { %>
+                <h3 class="text-success mb-0 font-weight-medium">+<%= coin.market_data.price_change_percentage_30d_in_currency.idr.toFixed(1)%>%</h3>
+                <% } else { %>
+                <h3 class="text-danger mb-0 font-weight-medium"><%= coin.market_data.price_change_percentage_30d_in_currency.idr.toFixed(1)%>%</h3>
+                <% } %>
+              </div>
+            </div>
+            <div class="col-3">
+              <% if (coin.market_data.price_change_percentage_30d_in_currency.idr >= 0 && coin.market_data.price_change_percentage_30d_in_currency.idr) { %>
+              <div class="icon icon-box-success">
+                <span class="mdi mdi-arrow-top-right icon-item percentage"></span>
+              </div>
+              <% } else { %>
+              <div class="icon icon-box-danger">
+                <span class="mdi mdi-arrow-bottom-left icon-item percentage"></span>
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <h6 class="text-muted font-weight-normal"><span class="font-weight-bold text-secondary">30d</span> Price in Currency</h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-2 col-md-4 col-sm-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9">
+              <div class="d-flex align-items-center align-self-start">
+                <% if (coin.market_data.price_change_percentage_1y_in_currency.idr >= 0 && coin.market_data.price_change_percentage_1y_in_currency.idr) { %>
+                <h3 class="text-success mb-0 font-weight-medium">+<%= coin.market_data.price_change_percentage_1y_in_currency.idr.toFixed(1)%>%</h3>
+                <% } else { %>
+                <h3 class="text-danger mb-0 font-weight-medium"><%= coin.market_data.price_change_percentage_1y_in_currency.idr.toFixed(1)%>%</h3>
+                <% } %>
+              </div>
+            </div>
+            <div class="col-3">
+              <% if (coin.market_data.price_change_percentage_1y_in_currency.idr >= 0 && coin.market_data.price_change_percentage_1y_in_currency.idr) { %>
+              <div class="icon icon-box-success">
+                <span class="mdi mdi-arrow-top-right icon-item percentage"></span>
+              </div>
+              <% } else { %>
+              <div class="icon icon-box-danger">
+                <span class="mdi mdi-arrow-bottom-left icon-item percentage"></span>
+              </div>
+              <% } %>
+            </div>
+          </div>
+          <h6 class="text-muted font-weight-normal"><span class="font-weight-bold text-secondary">1y</span> Price in Currency</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex converter align-items-center justify-content-center">
+            <img src="<%= coin.image.large %>" alt="<%= coin.name %>" width="200" class="mb-3" />
+            <h3 class="card-title text-uppercase"><%= coin.symbol %> <span class="text-capitalize">Converter</span></h3>
+          </div>
+          <form action="/id/coins/<%= coin.id %>" method="get" id="convertForm"> 
+            <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
+              <div class="text-md-center col-lg-10 text-xl-left">
+                <input class="form-control form-converter text-md-center text-xl-left" type="number" name="num" id="num" min="1" placeholder="1" value="<%= num %>" />
+              </div>
+              <div class="align-self-center flex-grow text-md-center text-right text-xl-right py-md-2 py-xl-0">
+                <h6 class="font-weight-medium mb-0 text-uppercase text-muted"><%= coin.symbol %></h6>
+              </div>
+            </div>
+            <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
+              <div class="text-md-center text-xl-left col-xl-9 align-self-center">
+                <h6 class="text-secondary mb-0"><%= Intl.NumberFormat('en-DE').format(convertedValue) %></h6>
+              </div>
+              <div class="align-self-center flex-grow text-center text-md-center text-xl-right py-md-2 py-xl-0">
+                <select name="currency" class="form-control form-converter text-center "  onchange="submitForm()">
+                  <% Object.keys(coin.market_data.current_price).forEach((currency) => { %>
+                    
+                    <option  value="<%= currency %>"  <%= currency === currenc ? 'selected' : '' %>><%= currency.toUpperCase() %></option>
+                  <% }) %>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+            <h2 class="card-title mb-1">About <%=coin.name %></h2>
+          <div class="row">
+            <div class="col-12">
+              <div class="preview-list">
+                <div class="preview-item">
+                  <div class="preview-item-content d-sm-flex flex-grow">
+                    <div class="flex-grow">
+                      <p class="text-muted mb-0 desc font-weight-light"> <%- coin.description.en %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="mb-4">Market Cap</h5>
+          <div class="row">
+            <div class="col-12 my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+                <h2 class="mb-4">Rp <%= Intl.NumberFormat('en-DE').format(coin.market_data.market_cap.idr) %></h2>
+              </div>
+              <h6 class="text-muted font-weight-normal text-capitalize">coin market cap in currency</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="mb-4">24 Hour Trading Vol</h5>
+          <div class="row">
+            <div class="col-12 my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+                <h2 class="mb-4">Rp <%= Intl.NumberFormat('en-DE').format(coin.market_data.total_volume.idr) %></h2>
+              </div>
+              <h6 class="text-muted font-weight-normal text-capitalize">coin total trading volume in currency</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="mb-4">Total Supply</h5>
+          <div class="row">
+            <div class="col-12 my-auto">
+              <div class="d-flex d-sm-block d-md-flex align-items-center">
+                <h2 class="mb-4"><%= Intl.NumberFormat('en-DE').format(coin.market_data.total_supply) %></h2>
+              </div>
+              <h6 class="text-muted font-weight-normal text-capitalize">coin total supply</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6  grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex flex-row justify-content-between">
+            <h4 class="card-title">Information of <span class="text-uppercase"><%= coin.symbol%></span></h4>
+          </div>
+          <div class="preview-list">
+            <div class="preview-item border-bottom">
+              <div class="preview-item-content d-flex flex-grow">
+                <div class="flex-grow">
+                  <div class="d-flex d-md-block d-xl-flex justify-content-between">
+                    <h5 class="preview-subject text-muted ">Website</h5>
+                    <div>
+                      <a href="<%=coin.links.homepage%>" class="btn btn-outline-secondary mr-2" target="_blank">Company Website</a>
+                      <a href="<%=coin.links.whitepaper%>" class="btn btn-outline-secondary" target="_blank">Whitepaper</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="preview-item border-bottom">
+              <div class="preview-item-content d-flex flex-grow">
+                <div class="flex-grow">
+                  <div class="d-flex d-md-block d-xl-flex justify-content-between">
+                    <h5 class="preview-subject text-muted ">Community</h5>
+                    <div>
+                      <a href="<%=coin.links.official_forum_url%>" class="btn btn-outline-secondary mr-2" target="_blank">Official Forum</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="preview-item border-bottom">
+              <div class="preview-item-content d-flex flex-grow">
+                <div class="flex-grow">
+                  <div class="d-flex d-md-block d-xl-flex justify-content-between">
+                    <h5 class="preview-subject text-muted ">Source Code</h5>
+                    <div>
+                      <a href="<%=coin.links.repos_url.github[0]%>" class="btn btn-outline-secondary mr-2" target="_blank">Github</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6  grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex flex-row justify-content-between">
+            <h4 class="card-title"><span class="text-uppercase"><%= coin.symbol %></span> Historical Price </h4>
+          </div>
+          <div class="preview-list">
+            <div class="preview-item border-bottom">
+              <div class="preview-item-content d-flex flex-grow">
+                <div class="flex-grow">
+                  <div class="d-flex d-md-block d-xl-flex justify-content-between">
+                    <h5 class="preview-subject text-muted align-self-center ">24h Range</h5>
+                   <h5 class="">Rp <%= Intl.NumberFormat('en-DE').format(coin.market_data.low_24h.idr) %> - Rp <%= Intl.NumberFormat('en-DE').format(coin.market_data.high_24h.idr)%></h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="preview-item border-bottom">
+              <div class="preview-item-content d-flex flex-grow">
+                <div class="flex-grow">
+                  <div class="d-flex d-md-block d-xl-flex justify-content-between">
+                    <h5 class="preview-subject text-muted align-self-center ">All-Time High</h5>
+                    <div class=" text-sm-right pt-2 pt-sm-0">
+                      <div class="d-flex flex-row align-items-center mb-2">
+                        <h5 class="mb-0">Rp <%= Intl.NumberFormat('en-DE').format(coin.market_data.ath.idr) %></h5>
+                        <% if (coin.market_data.ath_change_percentage.idr > 0 && coin.market_data.ath_change_percentag.idr) { %>
+                          <h6 class="text-success ml-2 mb-0 font-weight-medium mr-2">+<%= coin.market_data.ath_change_percentage.idr.toFixed(1) %>%</h6>
+                          <div class="icon icon-box-success btc">
+                            <span class="mdi mdi-arrow-top-right icon-sm"></span>
+                          </div>
+                        <% } else { %>
+                          <h6 class="text-danger ml-2 mb-0 font-weight-medium mr-2"><%= coin.market_data.ath_change_percentage.idr.toFixed(1) %>%</h6>
+                          <div class="icon icon-box-danger btc">
+                            <span class="mdi mdi-arrow-bottom-left icon-sm"></span>
+                          </div>
+                          <% } %>
+                      </div>
+                      <p class="text-muted mb-0"><%= daysTextAth %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="preview-item border-bottom">
+              <div class="preview-item-content d-flex flex-grow">
+                <div class="flex-grow">
+                  <div class="d-flex d-md-block d-xl-flex justify-content-between">
+                    <h5 class="preview-subject text-muted align-self-center ">All-Time Low</h5>
+                    <div class=" text-sm-right pt-2 pt-sm-0">
+                      <div class="d-flex flex-row align-items-center mb-2">
+                        <h5 class="mb-0">Rp <%= Intl.NumberFormat('en-DE').format(coin.market_data.atl.idr) %></h5>
+                        <% if (coin.market_data.atl_change_percentage.idr > 0 && coin.market_data.atl_change_percentage.idr) { %>
+                          <h6 class="text-success ml-2 mb-0 font-weight-medium mr-2">+<%= coin.market_data.atl_change_percentage.idr.toFixed(1) %>%</h6>
+                          <div class="icon icon-box-success btc">
+                            <span class="mdi mdi-arrow-top-right icon-sm"></span>
+                          </div>
+                        <% } else { %>
+                          <h6 class="text-danger ml-2 mb-0 font-weight-medium mr-2"><%= coin.market_data.atl_change_percentage.idr.toFixed(1) %>%</h6>
+                          <div class="icon icon-box-danger btc">
+                            <span class="mdi mdi-arrow-bottom-left icon-sm"></span>
+                          </div>
+                          <% } %>
+                      </div>
+                      <p class="text-muted mb-0"><%= daysTextAtl %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="btn btn-lg btn-secondary" href="/">Back to Home</a>
+</div>
+
+<script>
+  function submitForm() {
+    document.getElementById("convertForm").submit();
+  }
+</script>
+
+<%- include('partials/footer') %>
