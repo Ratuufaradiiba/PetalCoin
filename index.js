@@ -1,18 +1,21 @@
 import express from 'express';
 import axios from 'axios';
 import bodyParser from 'body-parser';
+import env from 'dotenv';
 
 const app = express();
 const port = 3000;
-const API_URL = 'https://api.coingecko.com/api/v3/';
+env.config();
+
+const API_URL = process.env.API_URL;
 const config = {
   headers: {
-    'x-cg-demo-api-key': 'CG-CrnkUjUhYyZWsQQiZ4CvpCW8',
+    'x-cg-demo-api-key': process.env.API_KEYHEADER,
   },
 };
 const vs = 'vs_currency=idr';
 
-let search =''
+let search = '';
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -21,7 +24,7 @@ app.get('/', async (req, res) => {
   try {
     const response = await axios.get(API_URL + 'coins/markets?' + vs + '&price_change_percentage=1h%2C24h%2C7d', config);
     const result = response.data;
-    res.render('index.ejs', { content: result, search: search});
+    res.render('index.ejs', { content: result, search: search });
   } catch (error) {
     console.error('Failed to get request:', error.message);
   }
@@ -37,8 +40,8 @@ app.get('/id/coins/:id', async (req, res) => {
     const response = await axios.get(API_URL + 'coins/' + id, config);
     const result = response.data;
 
-    const dateStringAth = result.market_data.ath_date.idr
-    const dateStringAtl = result.market_data.atl_date.idr
+    const dateStringAth = result.market_data.ath_date.idr;
+    const dateStringAtl = result.market_data.atl_date.idr;
     const dateAth = new Date(dateStringAth);
     const dateAtl = new Date(dateStringAtl);
     const today = new Date();
@@ -81,7 +84,7 @@ app.get('/id/coins/:id', async (req, res) => {
     } else {
       daysTextAth = diffDaysAth === 1 ? '1 day ago' : `${diffDaysAth} days ago`;
     }
-    
+
     if (diffYearsAtl > 0) {
       daysTextAtl = diffYearsAtl === 1 ? 'over 1 year' : `over ${diffYearsAtl} years`;
     } else if (diffMonthsAtl > 0) {
@@ -89,7 +92,7 @@ app.get('/id/coins/:id', async (req, res) => {
     } else {
       daysTextAtl = diffDaysAtl === 1 ? '1 day ago' : `${diffDaysAtl} days ago`;
     }
-    
+
     const currentPrice = result.market_data.current_price[curr];
     const convertedValue = currentPrice ? num * currentPrice : num * result.market_data.current_price.idr;
     res.render('detail.ejs', { coin: result, num: num, currenc: curr, convertedValue, daysTextAth: `${formattedDateAth} (${daysTextAth})`, daysTextAtl: `${formattedDateAtl} (${daysTextAtl})` });
@@ -99,26 +102,24 @@ app.get('/id/coins/:id', async (req, res) => {
 });
 
 app.get('/search', async (req, res) => {
-try {
-  let search = req.query.search || '';
+  try {
+    let search = req.query.search || '';
 
-  if (!search) {
-    return res.redirect('/');
+    if (!search) {
+      return res.redirect('/');
+    }
+
+    const response = await axios.get(`${API_URL}/search?query=${search}`, config);
+    const result = response.data.coins;
+
+    res.render('index.ejs', {
+      content: [],
+      filter: result,
+      search: search,
+    });
+  } catch (error) {
+    console.error('Failed to get Request:', error.message);
   }
-  
-  const response = await axios.get(`${API_URL}/search?query=${search}`, config);
-  const result = response.data.coins; 
-  
-  res.render('index.ejs', {
-    content: [], 
-    filter: result, 
-    search: search, 
-  });
-} catch (error) {
-  console.error('Failed to get Request:', error.message);
-  
-}
-
 });
 
 app.listen(port, () => {
